@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet type="text/xsl" href="bookstore.xsl"?>
+
+<!--  (tag per i commenti)
+VINCOLI:
+inserire i tag:
+5 volte <!ATTLIST> per indicare gli attributi 
+2 volte <!ENTITY> per indicare: “&c;” per cooking - “&w;” per web
+
+il tag <isbn> è in alternanza con <ean>
+i tags <author> e <coauthor> possono comparire più volte nello stesso libro
+- book category è obbligatorio
+- book cover è facoltativo
+- title lang è obbligatorio
+- ref non è obbligatorio e può comparire solo 1 volta max
+- ref webSite è facoltativo
+- ref img è facoltativo
+-->
+
+<!DOCTYPE bookstore [
+  <!ELEMENT bookstore (book+)>
+  <!ELEMENT book (author+,coAuthor*,title,year,price,(isbn | ean),img?)>
+    <!ATTLIST book category CDATA #REQUIRED>
+    <!ATTLIST book cover CDATA #IMPLIED>
+  <!ELEMENT author ( #PCDATA )>
+  <!ELEMENT coAuthor ( #PCDATA )> 
+  <!ELEMENT title ( #PCDATA )>
+    <!ATTLIST title lang CDATA #REQUIRED>
+  <!ELEMENT price ( #PCDATA )>
+  <!ELEMENT year ( #PCDATA )>
+  <!ELEMENT isbn ( #PCDATA )>
+  <!ELEMENT ean ( #PCDATA )>
+  <!ELEMENT img ( #PCDATA )> 
+      <!ATTLIST img src CDATA #IMPLIED>
+  <!ENTITY c "cooking">
+  <!ENTITY w "web">
+]>
+
+<bookstore>
+    <book category="&c;">
+        <author>Franco Angeli</author>
+        <coAuthor>Lina Clerici</coAuthor>
+        <title lang="en">Everyday Italian</title>
+        <year>2005</year>
+        <price>30.00</price>
+        <isbn>0071768815</isbn>
+        <img src="https://img.ibs.it/images/9780071768818_0_0_0_75.jpg"></img>
+        
+    </book>
+    <book category="children">
+        <author>J K. Rowling</author>
+        <title lang="en">Harry Potter</title>
+        <year>2005</year>
+        <price>29.99</price>
+        <ean>9788893814515</ean>
+        <img src="https://img2.libreriauniversitaria.it/BIT/300/451/9788893814515.jpg"></img>
+    </book>
+    <book category="&w;">
+        <author>James McGovern</author>
+        <author>Per Bothner</author>
+        <author>Kurt Cagle</author>
+        <author>James Linn</author>
+        <author>Vaidyanathan Nagarajan</author>
+        <title lang="en">XQuery Kick Start</title>
+        <year>2003</year>
+        <price>49.99</price>
+        <isbn>0071768920</isbn>
+        <img src="https://www.safaribooksonline.com/library/cover/0672324792/360h/"></img>
+        
+    </book>
+    <book category="&w;" cover="paperback">
+        <author>Erik T. Ray</author>
+        <title lang="en">Learning XML</title>
+        <year>2003</year>
+        <price>39.95</price>
+        <ean>9788893814656</ean>
+        <img src="https://covers.oreillystatic.com/images/9780596000462/cat.gif"></img>
+    </book>
+</bookstore> 
