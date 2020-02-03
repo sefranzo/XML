@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>prova4 DOM XML</title>
+    <body>
+        <p>RICERCA ELEMENTO ALL'INTERNO DI UN FILE XML sul sito del Ministero della Salute (www.salute.gov.it):</p>
+    	<p>Notifica Prodotti di Animali Vivi:</p>
+    	<p id="uno">nessun risultato di estrazione dati dal file XML</p>
+ 
+<script>
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		myFunction(this);
+		}
+	};
+	xhttp.open("GET", "http://www.salute.gov.it/imgs/C_17_pagineAree_2590_listaFile_itemName_4_file.xml", true);
+	xhttp.send();
+
+	function myFunction(xml) {
+		var xmlDoc = xml.responseXML;
+		document.getElementById("uno").innerHTML =
+		"Paese provenienza: " + xmlDoc.getElementsByTagName("PAESE_PROVEN")[0].childNodes[0].nodeValue + ' - ' +
+		"Localita' provenienza: " + xmlDoc.getElementsByTagName("LOC_PROVEN")[0].childNodes[0].nodeValue + ' - ' +
+		"Num. certificato: " + xmlDoc.getElementsByTagName("NUM_CERTIFICATO")[0].childNodes[0].nodeValue;
+	}
+</script>
+
+</body>
+</html> 
